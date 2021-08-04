@@ -1,0 +1,474 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  overflow-x: hidden;
+  line-height: 1.6;
+  letter-spacing: 1.6px;
+  font-family: "Inconsolata", monospace;
+  color: var(--clr-text);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* This makes sure the background image covers the full background. 
+   Avoids white empty space on the right of background image in iOS */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (-o-min-device-pixel-ratio: 3/2),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+:root {
+  --clr-grey: grey;
+  --clr-lt-grey: grey;
+  --clr-m-grey: rgb(82, 80, 80);
+  --clr-text: #444649;
+  --clr-theme-yellow: #f1c40f;
+  --clr-theme-pink: #e31b6d;
+  --clr-card-icon: white;
+
+  --clr-background: #f5f5f5;
+
+  --clr-drk-grey: #333;
+
+  --padding-s: 1rem;
+  --padding-m: 2rem;
+  --padding-l: 3rem;
+  --padding-xl: 5rem;
+
+  --margin-s: 1rem;
+  --margin-m: 3rem;
+  --margin-xl: 8rem;
+}
+h1,
+h3 {
+  letter-spacing: 1.1px;
+}
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 3rem;
+  margin: var(--margin-m);
+  letter-spacing: 3px;
+  font-family: "Bebas Neue", cursive;
+  margin-top: 10%;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.3));
+}
+h3 {
+  font-size: 2rem;
+  margin: var(--margin-m);
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1rem;
+}
+p {
+  font-size: 1.1rem;
+  margin-bottom: 1em; 
+}
+body p:last-child { margin-bottom: 0em; }
+
+/* Flex mixin function */
+@mixin flexprob($par1, $par2) {
+  display: flex;
+  flex-direction: $par1;
+  justify-content: $par2;
+  align-items: center;
+}
+
+/* Navigation Bar */
+nav#navbar {
+  width: 100%;
+  background-color: black;
+  @include flexprob(row, space-between);
+  border-bottom: 4px solid var(--clr-theme-yellow);
+  padding: var(--padding-s);
+  margin-bottom: var(--margin-xl);
+  z-index: 1000;
+
+  /* Nav bar */
+  ul.nav-list {
+    @include flexprob(row, space-between);
+    cursor: pointer;
+    list-style-type: none;
+    text-decoration: none;
+
+    li.nav-item {
+      a {
+        font-size: 0.75rem;
+        text-decoration: none;
+        padding: var(--padding-s);
+        color: var(--clr-lt-grey);
+
+        &:hover {
+          color: var(--clr-theme-yellow);
+        }
+      }
+    }
+  }
+
+  /* Media queries for Navbar */
+  @media (min-width: 370px) {
+    ul.nav-list {
+      li.nav-item a {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  @media (min-width: 700px) {
+    ul.nav-list {
+      li.nav-item a {
+        font-size: 2rem;
+        padding: var(--padding-m);
+      }
+    }
+  }
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Intro section */
+.intro-container {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  .main-div {
+    @include flexprob(column, center);
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.7)
+      ),
+      url("../img/b&w2.jpg");
+    background-size: cover;
+    h2 {
+      color: var(--clr-lt-grey);
+    }
+    h4 {
+      margin: var(--margin-m);
+      letter-spacing: 5px;
+      color: var(--clr-lt-grey);
+    }
+    .arrow {
+      .down-arrow i {
+        color: var(--clr-m-grey);
+        font-size: 4rem;
+        margin-top: 12rem;
+        animation: radial-pulse 1s infinite;
+      }
+      .down-arrow i:hover {
+        color: var(--clr-theme-yellow);
+      }
+
+      /* animation for arrow in intro landing page */
+      @keyframes radial-pulse {
+        0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 1);
+        }
+        100% {
+          box-shadow: 0 0 0 30px rgba(0, 0, 0, 0);
+        }
+      }
+    }
+  }
+
+  /* center div of landing page with light animation */
+  .center-div {
+    width: 95%;
+    height: auto;
+
+    ul {
+      display: flex;
+      justify-content: center;
+
+      li {
+        list-style: none;
+        text-transform: uppercase;
+        font-size: 2rem;
+        padding-left: var(--padding-m);
+        font-family: "Bebas Neue";
+        color: var(--clr-lt-grey);
+        animation: light 1.3s linear infinite;
+      }
+      li:first-child {
+        padding-left: 0;
+      }
+
+      /* delays the light animation for every nth-child by n second */
+      @for $n from 0 through 10 {
+        li:nth-child(#{$n + 1}) {
+          animation-delay: 0.1s * $n;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 360px) {
+    .center-div {
+      ul {
+        li {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
+  @media (min-width: 700px) {
+    .main-div {
+      h4 {
+        font-size: 2rem;
+      }
+    }
+    .center-div {
+      ul {
+        li {
+          font-size: 15rem;
+        }
+      }
+    }
+  }
+}
+/* animation for landing page */
+@keyframes light {
+  0% {
+    color: var(--clr-lt-grey);
+    text-shadow: none;
+  }
+
+  90% {
+    color: var(--clr-lt-grey);
+    text-shadow: none;
+  }
+
+  100% {
+    color: var(--clr-theme-yellow);
+    text-shadow: 0 0 1rem #d35400, 0 0 7rem #d35400;
+  }
+}
+
+/* About section */
+section#about {
+  @include flexprob(column, center);
+  margin-bottom: var(--margin-xl);
+  .about-cards {
+    max-width: 1400px;
+    position: relative;
+    margin: var(--margin-m) auto;
+
+    .about-card {
+      @include flexprob(column, center);
+      border-bottom: 5px solid var(--clr-theme-yellow);
+      margin: var(--margin-m);
+      padding: var(--padding-m);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .about-pic {
+        i {
+          color: var(--clr-drk-grey);
+        }
+        i:hover {
+          text-shadow: 2px 2px var(--clr-theme-yellow);
+        }
+      }
+      .about-container {
+        @include flexprob(column, center);
+        padding: 2px 16px;
+      }
+    }
+  }
+}
+@media (min-width: 700px) {
+  section#about {
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      grid-auto-rows: minmax(100px, auto);
+    }
+  }
+}
+
+section#skills {
+  @include flexprob(column, center);
+  background: var(--clr-background);
+  h2 {
+    padding: var(--padding-m);
+  }
+
+  .wrapper-skills {
+    padding: var(--padding-xl);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    place-items: center;
+    .skill {
+      @include flexprob(column, center);
+      .icon{
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.6));
+      }
+    }
+  }
+
+  @media (min-width: 700px) {
+    .wrapper-skills {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8rem;
+    }
+  }
+}
+
+/* Project details section */
+section#projects {
+  @include flexprob(column, center);
+
+  margin: var(--margin-xl) 0;
+  background: var(--clr-background);
+  .wrapper-projects {
+
+    .project-card {
+      @include flexprob(column, center);
+      background-color: white;
+      border-bottom: 5px solid var(--clr-theme-yellow);
+      border-radius: 5px;
+      margin: var(--margin-m);
+      padding: var(--padding-m);
+
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .project-pic {
+        @include flexprob(column, center);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+        .project-image {
+          object-fit: contain;
+          cursor: pointer;
+        }
+      }
+      .project-container {
+        @include flexprob(column, center);
+        h4 {
+          font-size: 1.2rem;
+          margin: var(--margin-m);
+        }
+      }
+    }
+  }
+}
+
+/* media queries for project section */
+@media (min-width: 400px) {
+  section#projects .wrapper-projects .project-card .project-container h4 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 700px) {
+  section#projects .wrapper-projects .project-card .project-container {
+   @include flexprob(column, center);
+  }
+}
+
+@media (min-width: 1000px) {
+  section#projects {
+    .wrapper-projects {
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1400px;
+      .project-card {
+        .project-container {
+          h4 {
+            width: 100%;
+            font-size: 2rem;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Footer section */
+footer#contact {
+  @include flexprob(column, center);
+  padding: var(--padding-xl);
+  margin-top: var(--margin-xl);
+  background-color: black;
+  h2{
+    margin-top: 2rem;
+  }
+    .mypic {
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+  h2 {
+    &:hover {
+      color: var(--clr-theme-yellow);
+    }
+  }
+
+  .social-list {
+    @include flexprob(row, center);
+    margin-top: var(--margin-xl);
+    list-style-type: none;
+
+    .socials-link {
+      margin: var(--margin-s);
+      padding: var(--padding-s);
+      border-radius: 50%;
+      .fas,
+      .fab {
+        font-size: 3rem;
+        color: var(--clr-theme-yellow);
+      }
+
+      .fas:hover,
+      .fab:hover {
+        text-shadow: 1px 1px var(--clr-theme-pink);
+      }
+      a {
+        text-decoration: none;
+        color: var(--clr-lt-grey);
+        font-size: 1.5rem;
+
+      }
+    }
+  }
+
+  .bottom-footer {
+    margin-top: var(--margin-xl);
+  }
+}
